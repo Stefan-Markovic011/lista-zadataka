@@ -6,26 +6,224 @@
 
     <title>Lista zadataka</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(135deg, #002fff, #a190b3);
+        }
+
+        .lista-zadataka-div {
+            width: 90%;
+            max-width: 500px;
+
+            padding: 30px;
+
+            background: white;
+            border-radius: 15px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .unos {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+
+            padding: 12px;
+
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            font-size: 16px;
+            outline: none;
+        }
+
+        #dodajZadatak {
+            padding: 12px 18px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #667eea;
+            color: white;
+
+            cursor: pointer;
+        }
+
+        #dodajZadatak:hover {
+            background: #5568d8;
+        }
+
+        ul {
+            padding: 0;
+            margin-top: 20px;
+
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 12px;
+
+            margin-bottom: 10px;
+
+            background: #f1f1f1;
+            border-radius: 8px;
+        }
+
+        .obrisi {
+            border: none;
+            border-radius: 6px;
+
+            padding: 7px 10px;
+
+            background: #dc3545;
+            color: white;
+
+            cursor: pointer;
+        }
+
+        .obrisi:hover {
+            background: #c82333;
+        }
+
+        @media (max-width: 500px) {
+            .unos {
+                flex-direction: column;
+            }
+
+            #dodajZadatak {
+                width: 100%;
+            }
+
+            li {
+                align-items: flex-start;
+                gap: 10px;
+                flex-direction: column;
+            }
+
+            .obrisi {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <div class="lista-zadataka-div">
+
         <h1>Lista zadataka</h1>
 
         <div class="unos">
-            <input type="text" id="unosZadatka" placeholder="Unesite zadatak" autocomplete="off">
+            <input
+                type="text"
+                id="unosZadatka"
+                placeholder="Unesite zadatak"
+            >
 
-            <button id="dodajZadatak">Dodaj</button>
+            <button id="dodajZadatak">
+                Dodaj
+            </button>
         </div>
 
         <ul id="listaZadataka"></ul>
 
-        <p id="praznaLista">Nemate nijedan zadatak.</p>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const input = document.getElementById("unosZadatka");
+        const button = document.getElementById("dodajZadatak");
+        const lista = document.getElementById("listaZadataka");
+
+        let zadaci = JSON.parse(localStorage.getItem("zadaci")) || [];
+
+        function sacuvaj() {
+            localStorage.setItem("zadaci", JSON.stringify(zadaci));
+        }
+
+        function prikaziZadatke() {
+            lista.innerHTML = "";
+
+            zadaci.forEach(function(zadatak) {
+
+                const li = document.createElement("li");
+
+                const tekst = document.createElement("span");
+                tekst.textContent = zadatak.tekst;
+
+                const obrisi = document.createElement("button");
+                obrisi.classList.add("obrisi");
+                obrisi.textContent = "Obriši";
+
+                obrisi.onclick = function() {
+                    zadaci = zadaci.filter(function(item) {
+                        return item.id !== zadatak.id;
+                    });
+
+                    sacuvaj();
+                    prikaziZadatke();
+                };
+
+                li.appendChild(tekst);
+                li.appendChild(obrisi);
+
+                lista.appendChild(li);
+            });
+        }
+
+        function dodajZadatak() {
+            const tekst = input.value.trim();
+
+            if (tekst === "") {
+                return;
+            }
+
+            zadaci.push({
+                id: Date.now(),
+                tekst: tekst
+            });
+
+            sacuvaj();
+            prikaziZadatke();
+
+            input.value = "";
+            input.focus();
+        }
+
+        button.onclick = dodajZadatak;
+
+        input.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                dodajZadatak();
+            }
+        });
+
+        prikaziZadatke();
+    </script>
 
 </body>
 </html>
