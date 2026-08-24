@@ -1,0 +1,33 @@
+.lista-zadataka-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    min-height: 100vh;
+}
+.lista-zadataka-div input {
+    padding: 14px 18px;
+    border: none;
+    border-radius: 12px;
+    outline: none;
+    font-size: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.lista-zadataka-div button {
+    padding: 14px 25px;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    color: #667eea;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.lista-zadataka-div button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
