@@ -1,4 +1,4 @@
-# lista-obaveza
+# lista-zadataka
 
 Jednostavna web aplikacija za dodavanje i prikaz zadataka. Projekat je napravljen kao vežba za rad sa HTML-om, CSS-om i JavaScript-om.
 
