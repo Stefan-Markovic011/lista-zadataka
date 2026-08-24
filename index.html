@@ -1,20 +1,35 @@
+ChatGPT је рекао:
+Naravno — evo kompletne sređene verzije projekta, sa HTML + CSS + JavaScript, uključujući localStorage, brisanje zadataka, označavanje kao završeno i dodavanje preko Enter-a.
+
+index.html
 <!DOCTYPE html>
 <html lang="sr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Lista zadataka</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <div class="lista-zadataka-div">
         <h1>Lista zadataka</h1>
-        <input type="text" id="unosZadatka" placeholder="Unesite zadatak">
-        <button id="DodajZadatak">Dodaj zadatak</button>
-        <div id="listaZadataka">
-            
+
+        <div class="unos">
+            <input type="text" id="unosZadatka" placeholder="Unesite zadatak" autocomplete="off">
+
+            <button id="dodajZadatak">Dodaj</button>
         </div>
+
+        <ul id="listaZadataka"></ul>
+
+        <p id="praznaLista">Nemate nijedan zadatak.</p>
     </div>
+
+    <script src="script.js"></script>
+
 </body>
-<script src="script.js"></script>
 </html>
