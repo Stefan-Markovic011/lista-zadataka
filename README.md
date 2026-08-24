@@ -6,19 +6,11 @@ Aplikacija je dostupna na:
 
 https://stefan-markovic011.github.io/lista-zadataka/
 
-Funkcionalnosti
-
-Dodavanje novih zadataka
-Unos zadatka preko input polja
-Prikaz zadataka na stranici
-Jednostavan i pregledan korisnički interfejs
-
 Tehnologije
 
 HTML5
 CSS3
 JavaScript
-GitHub Pages
 
 Struktura projekta
 lista-zadataka/
